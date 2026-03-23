@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>圍棋 9×9</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="go.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <div class="app go-app">
+    <nav class="game-nav game-nav--split">
+      <a href="index.html" class="nav-back">← 返回主頁</a>
+      <div id="user-bar" class="user-bar"></div>
+    </nav>
+    <header class="header">
+      <h1>圍棋 9×9</h1>
+      <p class="subtitle">雙人輪流：黑先，可虛手；連續兩次虛手後計算勝負</p>
+    </header>
+
+    <section class="controls go-controls" aria-label="遊戲控制">
+      <div class="control-row go-control-row">
+        <button type="button" id="go-btn-new" class="btn primary">新局</button>
+        <button type="button" id="go-btn-pass" class="btn secondary">虛手</button>
+      </div>
+      <div class="status-row">
+        <p id="go-status" class="status" role="status">輪到黑棋落子</p>
+      </div>
+    </section>
+
+    <main class="main go-main">
+      <div
+        id="go-board"
+        class="go-board"
+        role="grid"
+        aria-label="9 乘 9 圍棋棋盤"
+      ></div>
+
+      <aside class="stats-panel go-panel" aria-label="局勢">
+        <h2>局勢</h2>
+        <dl class="go-stats">
+          <dt>提子（黑提白）</dt><dd id="go-cap-b">0</dd>
+          <dt>提子（白提黑）</dt><dd id="go-cap-w">0</dd>
+        </dl>
+        <h3>說明</h3>
+        <p class="go-help">打劫：不可立刻還原上一手前的局面。數地僅供參考（封閉空點＋提子）。</p>
+        <div id="go-result" class="go-result hidden" role="status"></div>
+      </aside>
+    </main>
+  </div>
+  <script src="auth.js"></script>
+  <script src="user-bar.js"></script>
+  <script src="go.js"></script>
+</body>
+</html>

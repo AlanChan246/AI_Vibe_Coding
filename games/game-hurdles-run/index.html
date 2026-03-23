@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hurdles Runner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="game-root" tabindex="0" aria-label="Hurdles runner. Press Space to jump over hurdles, cacti, bushes, and pits.">
+    <canvas id="game-canvas" width="960" height="540" aria-hidden="true"></canvas>
+    <div id="hud">
+      <div id="score-row">
+        <span id="score-label">Score</span>
+        <span id="score-value">0</span>
+      </div>
+      <div id="high-row">
+        <span id="high-label">Best</span>
+        <span id="high-value">0</span>
+      </div>
+    </div>
+    <div id="overlay-menu" class="overlay visible">
+      <h1>Hurdles Runner</h1>
+      <p class="hint">Press <kbd>Space</kbd> to start</p>
+      <p class="sub">Jump over hurdles, cacti, and bushes, and clear gaps in the track. You lose if you hit one or fall in a pit.</p>
+    </div>
+    <div id="overlay-gameover" class="overlay">
+      <h2>Game over</h2>
+      <p id="final-score" class="final-score"></p>
+      <p class="hint">Press <kbd>Space</kbd> to play again</p>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

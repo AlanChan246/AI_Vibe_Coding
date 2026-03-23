@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Five in a row on a 5×5 board — two-player chess-style pieces. First full line wins."
+    />
+    <title>Five in a row — 5×5</title>
+    <link rel="stylesheet" href="board.css" />
+  </head>
+  <body>
+    <div class="board-page">
+      <header class="board-header">
+        <h1>Five in a row</h1>
+        <p>
+          5×5 board. Take turns placing pieces. The first player to claim a full row, column, or
+          diagonal wins.
+        </p>
+      </header>
+
+      <div class="status-panel">
+        <p class="status-msg" id="status" data-side="white" aria-live="polite">White to move</p>
+        <span class="turn-pill" id="turn-indicator">
+          <span class="turn-dot turn-dot--white" aria-hidden="true"></span>
+          Current side
+        </span>
+      </div>
+
+      <div class="board-wrap">
+        <div class="board" id="board" role="grid" aria-label="5 by 5 game board"></div>
+      </div>
+
+      <div class="board-actions">
+        <button type="button" class="btn" id="btn-new-game">New game</button>
+      </div>
+
+      <aside class="rules">
+        <h2>Rules</h2>
+        <ul>
+          <li>White moves first, then Black, like chess colors.</li>
+          <li>A winning line is exactly five cells in a row — on this board, that is a full row, full column, or main diagonal.</li>
+          <li>If every square is filled with no winner, the game is a draw.</li>
+        </ul>
+        <p style="margin: 0.75rem 0 0; font-size: 0.85rem; color: var(--muted)">
+          <a href="luminara.html">Open the Luminara RPG</a> (separate page).
+        </p>
+      </aside>
+    </div>
+
+    <script src="board.js"></script>
+  </body>
+</html>

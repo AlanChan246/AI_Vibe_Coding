@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PVP 格鬥 · 火柴人</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="fighter.css" />
+</head>
+<body>
+  <div class="app fighter-app">
+    <nav class="game-nav game-nav--split">
+      <a href="index.html" class="nav-back">← 返回主廳</a>
+      <div id="user-bar" class="user-bar"></div>
+    </nav>
+
+    <header class="header fighter-header">
+      <h1>雙人快打</h1>
+      <p class="subtitle">火柴人 PVP · 三種職業與專屬技能 · 三戰兩勝</p>
+    </header>
+
+    <section class="fighter-scenes" aria-label="對戰場景">
+      <span class="fighter-scenes__label">場景</span>
+      <div class="fighter-scenes__opts" role="group" aria-label="切換場地風格">
+        <button type="button" class="scene-chip" data-scene="rooftop" aria-pressed="false">霓虹天台</button>
+        <button type="button" class="scene-chip" data-scene="dojo" aria-pressed="false">暮色道場</button>
+        <button type="button" class="scene-chip" data-scene="circuit" aria-pressed="false">賽博擂台</button>
+      </div>
+    </section>
+
+    <section id="char-select" class="char-select" aria-label="選角">
+      <p class="char-select__title">選擇角色後按空白鍵開戰</p>
+      <div class="char-select__grid">
+        <div class="char-select__side">
+          <h3 class="char-select__label">P1</h3>
+          <div class="char-select__keys">鍵 <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> · 鎖定 <kbd>F</kbd></div>
+          <div class="char-cards" data-player="1">
+            <button type="button" class="char-card" data-char="striker">
+              <span class="char-card__role">攻擊型</span>
+              <strong>狂戰</strong>
+              <span class="char-card__skill">技能：爆衝直拳（短距離突進重擊）</span>
+            </button>
+            <button type="button" class="char-card" data-char="tank">
+              <span class="char-card__role">防禦型</span>
+              <strong>堅盾</strong>
+              <span class="char-card__skill">技能：鐵壁架勢（大幅減傷）</span>
+            </button>
+            <button type="button" class="char-card" data-char="ranger">
+              <span class="char-card__role">遠程型</span>
+              <strong>遊擊</strong>
+              <span class="char-card__skill">技能：氣勁波（發射遠程氣彈）</span>
+            </button>
+          </div>
+          <p id="p1-pick" class="char-select__pick">未鎖定</p>
+        </div>
+        <div class="char-select__side">
+          <h3 class="char-select__label">P2</h3>
+          <div class="char-select__keys">鍵 <kbd>I</kbd> <kbd>O</kbd> <kbd>P</kbd> · 鎖定 <kbd>]</kbd></div>
+          <div class="char-cards" data-player="2">
+            <button type="button" class="char-card" data-char="striker">
+              <span class="char-card__role">攻擊型</span>
+              <strong>狂戰</strong>
+              <span class="char-card__skill">爆衝直拳</span>
+            </button>
+            <button type="button" class="char-card" data-char="tank">
+              <span class="char-card__role">防禦型</span>
+              <strong>堅盾</strong>
+              <span class="char-card__skill">鐵壁架勢</span>
+            </button>
+            <button type="button" class="char-card" data-char="ranger">
+              <span class="char-card__role">遠程型</span>
+              <strong>遊擊</strong>
+              <span class="char-card__skill">氣勁波</span>
+            </button>
+          </div>
+          <p id="p2-pick" class="char-select__pick">未鎖定</p>
+        </div>
+      </div>
+      <p id="char-select-hint" class="char-select__hint">雙方皆鎖定後，點一下場地並按 <kbd>空白鍵</kbd> 開始。</p>
+    </section>
+
+    <section id="fight-hud" class="fighter-hud hidden" aria-label="血量與比分">
+      <div class="fighter-hud__p fighter-hud__p1">
+        <span id="label-p1" class="fighter-hud__label">P1</span>
+        <div class="fighter-bar"><div id="hp1" class="fighter-bar__fill fighter-bar__fill--p1"></div></div>
+        <div class="skill-cd"><span>技能</span><div class="skill-cd__track"><div id="cd1" class="skill-cd__fill"></div></div></div>
+      </div>
+      <div class="fighter-hud__score" aria-live="polite">
+        <span id="score-display">0 — 0</span>
+      </div>
+      <div class="fighter-hud__p fighter-hud__p2">
+        <span id="label-p2" class="fighter-hud__label">P2</span>
+        <div class="fighter-bar"><div id="hp2" class="fighter-bar__fill fighter-bar__fill--p2"></div></div>
+        <div class="skill-cd skill-cd--p2"><span>技能</span><div class="skill-cd__track"><div id="cd2" class="skill-cd__fill"></div></div></div>
+      </div>
+    </section>
+
+    <div id="canvas-area" class="fighter-canvas-wrap hidden" tabindex="0" role="application" aria-label="格鬥場地">
+      <canvas id="fighter-canvas" width="960" height="420"></canvas>
+      <div id="fighter-overlay" class="fighter-overlay hidden" aria-hidden="true">
+        <p id="overlay-text" class="fighter-overlay__text"></p>
+        <button type="button" id="btn-next" class="btn primary">下一回合</button>
+        <button type="button" id="btn-reset-match" class="btn secondary">重置比賽</button>
+      </div>
+    </div>
+
+    <section id="fight-help" class="fighter-help hidden" aria-label="操作說明">
+      <div class="fighter-help__col">
+        <h2>P1</h2>
+        <p><kbd>A</kbd><kbd>D</kbd> 移動 · <kbd>W</kbd> 跳 · <kbd>V</kbd> 輕擊 · <kbd>B</kbd> 重擊 · <kbd>Q</kbd> 技能</p>
+      </div>
+      <div class="fighter-help__col">
+        <h2>P2</h2>
+        <p><kbd>←</kbd><kbd>→</kbd> 移動 · <kbd>↑</kbd> 跳 · <kbd>J</kbd> 輕擊 · <kbd>K</kbd> 重擊 · <kbd>;</kbd> 技能</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="user-bar.js"></script>
+  <script src="fighter.js"></script>
+</body>
+</html>

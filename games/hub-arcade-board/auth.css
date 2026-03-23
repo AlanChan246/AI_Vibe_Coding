@@ -1,0 +1,300 @@
+/* 登入頁 + 全站 user-bar */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+.auth-shell {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-nav {
+  margin-bottom: 1rem;
+}
+
+.auth-card {
+  padding: 1.75rem 1.5rem 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.auth-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: 0.04em;
+}
+
+.auth-lead {
+  margin: 0 0 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(186, 198, 216, 0.92);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(148, 163, 184, 0.9);
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.auth-tab.is-active {
+  color: #0c1222;
+  background: linear-gradient(135deg, #7dd3fc 0%, #a5f3fc 100%);
+  box-shadow: 0 2px 12px rgba(56, 189, 248, 0.25);
+}
+
+.auth-msg {
+  min-height: 1.35rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: rgba(125, 211, 252, 0.95);
+}
+
+.auth-msg--err {
+  color: #fca5a5;
+}
+
+.auth-panel {
+  display: none;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.auth-panel.is-active {
+  display: flex;
+}
+
+.auth-label {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(148, 163, 184, 0.85);
+  text-transform: uppercase;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  margin-bottom: 0.25rem;
+  font: inherit;
+  font-size: 1rem;
+  color: #f1f5f9;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(100, 140, 200, 0.3);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-input:focus {
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.auth-submit {
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.35rem 0 1rem;
+  color: rgba(148, 163, 184, 0.55);
+  font-size: 0.75rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.auth-guest {
+  width: 100%;
+}
+
+.auth-hint {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(148, 163, 184, 0.55);
+}
+
+/* —— 頂部使用者列 —— */
+.user-bar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.user-bar-wrap .user-bar {
+  justify-content: flex-start;
+}
+
+.user-bar-wrap .user-bar__actions {
+  margin-left: auto;
+}
+
+.user-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.85rem;
+  width: 100%;
+  max-width: 640px;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.88rem;
+}
+
+.user-bar__badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.user-bar__badge--user {
+  color: #0c1222;
+  background: linear-gradient(135deg, #7dd3fc, #c4b5fd);
+}
+
+.user-bar__badge--guest {
+  color: #e2e8f0;
+  background: rgba(100, 116, 139, 0.45);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.user-bar__badge--anon {
+  color: rgba(226, 232, 240, 0.85);
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.user-bar__name {
+  font-weight: 600;
+  color: #f1f5f9;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-bar__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-left: auto;
+}
+
+.user-bar__link {
+  color: var(--accent, #38bdf8);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.user-bar__link:hover {
+  text-decoration: underline;
+}
+
+.user-bar__btn {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.25);
+  cursor: pointer;
+}
+
+.user-bar__btn:hover {
+  background: rgba(127, 29, 29, 0.4);
+}
+
+/* 遊戲內頂欄：與返回連結並排 */
+.game-nav--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+}
+
+.game-nav--split .user-bar {
+  max-width: none;
+  flex: 1;
+  min-width: min(100%, 280px);
+  justify-content: flex-end;
+  border-radius: 14px;
+}
+
+.game-nav--split .user-bar__actions {
+  margin-left: 0;
+}
+
+@media (max-width: 520px) {
+  .game-nav--split {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .game-nav--split .user-bar {
+    justify-content: center;
+  }
+
+  .game-nav--split .user-bar__actions {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,134 @@
+/* 井字過三關 — 疊在 styles.css 之上 */
+
+.ttt-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1rem 0 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ttt-progress-label {
+  font-size: 0.95rem;
+  color: rgba(246, 240, 230, 0.85);
+}
+
+.ttt-stages {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ttt-stage {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(160, 195, 255, 0.25);
+  color: rgba(246, 240, 230, 0.5);
+  transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.ttt-stage.current {
+  border-color: var(--accent);
+  color: #fff;
+  background: rgba(99, 102, 241, 0.25);
+  transform: scale(1.08);
+}
+
+.ttt-stage.done {
+  border-color: #34d399;
+  background: rgba(52, 211, 153, 0.2);
+  color: #a7f3d0;
+}
+
+.ttt-board-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 0 2rem;
+}
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: min(90vw, 320px);
+  aspect-ratio: 1;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(40, 35, 55, 0.95), rgba(20, 18, 35, 0.98));
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(120, 160, 255, 0.15);
+}
+
+.ttt-cell {
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: clamp(2rem, 10vw, 3rem);
+  font-weight: 800;
+  color: var(--paper);
+  background: rgba(255, 255, 255, 0.06);
+  transition: background 0.15s, transform 0.1s;
+}
+
+.ttt-cell:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.22);
+}
+
+.ttt-cell:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.ttt-cell:disabled {
+  cursor: default;
+  opacity: 0.95;
+}
+
+.ttt-cell.x {
+  color: #93c5fd;
+  text-shadow: 0 0 20px rgba(147, 197, 253, 0.5);
+}
+
+.ttt-cell.o {
+  color: #fca5a5;
+  text-shadow: 0 0 20px rgba(252, 165, 165, 0.45);
+}
+
+.ttt-hint {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(246, 240, 230, 0.65);
+  max-width: 28rem;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.ttt-rules {
+  max-width: 32rem;
+  margin: 2rem auto 0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(120, 160, 255, 0.12);
+  font-size: 0.88rem;
+  color: rgba(246, 240, 230, 0.75);
+  line-height: 1.55;
+}
+
+.ttt-rules h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--paper);
+}
+
+.ttt-rules p {
+  margin: 0;
+}

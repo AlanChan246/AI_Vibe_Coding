@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mines</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <h1 class="title">Mines</h1>
+
+        <label class="field">
+          <span class="label">Grid size (N×N)</span>
+          <input
+            id="gridSize"
+            type="number"
+            min="5"
+            max="24"
+            value="8"
+            inputmode="numeric"
+          />
+        </label>
+
+        <label class="field">
+          <span class="label">Mines</span>
+          <input id="mineCount" type="number" min="1" value="10" inputmode="numeric" />
+        </label>
+
+        <label class="field">
+          <span class="label">Bet ($)</span>
+          <input id="betAmount" type="number" min="1" value="10" inputmode="numeric" />
+        </label>
+
+        <label class="field">
+          <span class="label">Safe cells to win (bet × 1.5, rounded up)</span>
+          <input
+            id="safeCellsToWin"
+            type="number"
+            readonly
+            value="15"
+            aria-readonly="true"
+            title="Derived from your bet: $1 requires 2 safe cells, $10 requires 15, etc."
+          />
+        </label>
+
+        <button type="button" class="btn primary" id="newGameBtn">New game</button>
+        <p class="status" id="statusText" role="status">Set options and start a round.</p>
+      </aside>
+
+      <main class="main">
+        <p class="main-balance" id="balanceDisplay" aria-live="polite">Balance: $100</p>
+        <div class="main-stack">
+          <div class="board-wrap">
+            <div id="board" class="board" aria-label="Mine grid"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>

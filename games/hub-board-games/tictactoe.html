@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>井字過三關 · 網頁版</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tictactoe.css" />
+</head>
+<body>
+  <div class="app ttt-app">
+    <header class="header">
+      <h1>井字過三關</h1>
+      <p class="subtitle">
+        連續贏三局井字棋即可通關；每關電腦更聰明 ·
+        <a href="index.html">遊戲大廳</a> ·
+        <a href="ludo.html">飛行棋</a> ·
+        <a href="gomoku.html">五子棋</a>
+      </p>
+    </header>
+
+    <section class="toolbar" aria-label="進度">
+      <button type="button" id="btn-restart" class="btn ghost">從頭開始</button>
+    </section>
+
+    <div class="ttt-progress" aria-live="polite">
+      <span class="ttt-progress-label">進度</span>
+      <div class="ttt-stages" role="list">
+        <span class="ttt-stage current" role="listitem" title="第一關：隨機">1</span>
+        <span class="ttt-stage" role="listitem" title="第二關：會擋會攻">2</span>
+        <span class="ttt-stage" role="listitem" title="第三關：最佳化">3</span>
+      </div>
+    </div>
+
+    <section class="status-bar" aria-live="polite">
+      <span id="ttt-status" class="turn-label">第 1 關 · 輪到你（✕）</span>
+      <span id="ttt-think" class="think-label hidden" aria-hidden="true">電腦思考中…</span>
+    </section>
+
+    <p class="ttt-hint">
+      你執 ✕ 先手，電腦執 ○。單關平手可重打本關；若輸一局，整趟從第一關重來。
+    </p>
+
+    <main class="ttt-board-wrap">
+      <div
+        id="ttt-board"
+        class="ttt-board"
+        role="grid"
+        aria-label="井字棋盤，九格"
+      ></div>
+    </main>
+
+    <aside class="ttt-rules">
+      <h2>三關說明</h2>
+      <p>
+        <strong>第一關</strong>：電腦隨機選空格。<strong>第二關</strong>：會優先連線取勝與擋住你的三連，並偏好中央與角。<strong>第三關</strong>：多數步數用極大極小搜尋，偶爾降級為第二關邏輯，難度高但仍可能過關。
+      </p>
+    </aside>
+  </div>
+
+  <div id="ttt-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="ttt-overlay-title">
+    <div class="modal">
+      <h2 id="ttt-overlay-title" class="modal-title"></h2>
+      <p id="ttt-overlay-msg" class="modal-msg"></p>
+      <div class="modal-actions">
+        <button type="button" id="btn-again" class="btn primary"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="tictactoe.js"></script>
+</body>
+</html>

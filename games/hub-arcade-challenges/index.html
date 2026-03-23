@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="The Alvin Chan expirenement — six arcade challenges, one life. Play in your browser." />
+  <meta name="theme-color" content="#030510" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Alvin Chan" />
+  <title>The Alvin Chan expirenement</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Star Wars crawl -->
+  <div id="screen-crawl" class="screen active">
+    <div class="crawl-space">
+      <div class="crawl-content">
+        <h1 class="crawl-title">welcome alvin chan, I am the owner of the game.</h1>
+        <p class="crawl-body" id="crawl-description"></p>
+      </div>
+    </div>
+    <p class="hint">Press <kbd>Enter</kbd> to continue</p>
+  </div>
+
+  <!-- Futuristic briefing -->
+  <div id="screen-briefing" class="screen">
+    <div class="terminal">
+      <div class="terminal-header">◆ UPLINK // SECURE CHANNEL ◆</div>
+      <p class="terminal-line glitch" data-text="Alvin Chan, you will have to challenge 6 games to win.">Alvin Chan, you will have to challenge 6 games to win.</p>
+      <p class="terminal-sub">You only have <strong>1 life</strong> to beat all six levels. Win each game in order. After each victory, press <kbd>Enter</kbd> to continue.</p>
+      <div class="briefing-cheat">
+        <label class="briefing-cheat-label" for="briefing-pass">Access code</label>
+        <div class="briefing-cheat-row">
+          <input type="password" id="briefing-pass" class="briefing-pass-input" placeholder="······" maxlength="32" autocomplete="off" />
+          <button type="button" id="btn-briefing-unlock" class="briefing-unlock-btn">Unlock</button>
+        </div>
+        <div id="briefing-skip-row" class="briefing-skip-row hidden">
+          <p class="briefing-skip-title">Route unlocked</p>
+          <button type="button" id="btn-skip-final" class="briefing-skip-btn">Final fight — Level 6 (Sans)</button>
+          <button type="button" id="btn-skip-hell" class="briefing-skip-btn">Hell mode</button>
+        </div>
+      </div>
+      <p class="hint dim">Press <kbd>Enter</kbd> to begin from level 1</p>
+    </div>
+  </div>
+
+  <!-- Game 1: Blackjack -->
+  <div id="screen-g1" class="screen game-screen">
+    <div class="game-header">
+      <span class="level-tag">Level 1 / 6</span>
+      <h2>Blackjack</h2>
+      <p class="one-life">One life — lose here and it is game over.</p>
+    </div>
+    <div id="blackjack-root" class="game-panel"></div>
+  </div>
+
+  <!-- Game 2: Space Invaders -->
+  <div id="screen-g2" class="screen game-screen">
+    <div class="game-header">
+      <span class="level-tag">Level 2 / 6</span>
+      <h2>Space Invaders</h2>
+    </div>
+    <canvas id="canvas-invaders" width="800" height="600"></canvas>
+    <p class="controls-hint">← → move · Hold <kbd>Space</kbd> — machine gun (max ROF) + homing aimbot · Clear the fleet</p>
+  </div>
+
+  <!-- Game 3: Street Fighter -->
+  <div id="screen-g3" class="screen game-screen">
+    <div class="game-header">
+      <span class="level-tag">Level 3 / 6</span>
+      <h2>Street Fighter Reimagined</h2>
+    </div>
+    <div id="sf-select" class="sf-select"></div>
+    <canvas id="canvas-sf" width="900" height="420" class="hidden"></canvas>
+    <p id="sf-hint" class="controls-hint hidden">A/D move · W jump · J punch · K kick · <kbd>L</kbd> super fireball (needs full meter) · Win by KO</p>
+  </div>
+
+  <!-- Game 4: Pong -->
+  <div id="screen-g4" class="screen game-screen">
+    <div class="game-header">
+      <span class="level-tag">Level 4 / 6</span>
+      <h2>Table Tennis</h2>
+    </div>
+    <canvas id="canvas-pong" width="700" height="500"></canvas>
+    <p class="controls-hint">200 mph curved smashes — aim assist + mouse / ↑ ↓ — first to 5 wins</p>
+  </div>
+
+  <!-- Game 5: Fifth Grader -->
+  <div id="screen-g5" class="screen game-screen">
+    <div class="game-header">
+      <span class="level-tag">Level 5 / 6</span>
+      <h2>Are You Smarter Than a Fifth Grader?</h2>
+    </div>
+    <div id="fifth-root" class="game-panel wide"></div>
+  </div>
+
+  <!-- Game 6: Sans (final) -->
+  <div id="screen-g6" class="screen game-screen">
+    <div class="game-header">
+      <span class="level-tag">Level 6 / 6</span>
+      <h2>Sans — Final Trial</h2>
+    </div>
+    <canvas id="canvas-sans" width="640" height="480"></canvas>
+    <p class="controls-hint">Arrow keys · <strong>5s</strong> prep, then <strong>20s</strong> survive</p>
+  </div>
+
+  <!-- Win overlay (between levels) -->
+  <div id="overlay-win" class="overlay hidden">
+    <div class="overlay-box">
+      <h2>Level clear!</h2>
+      <p>Press <kbd>Enter</kbd> to continue</p>
+    </div>
+  </div>
+
+  <!-- Game over -->
+  <div id="overlay-lose" class="overlay hidden">
+    <div class="overlay-box lose">
+      <h2>Game Over</h2>
+      <p>You had only one life.</p>
+      <button type="button" id="btn-retry">Play again</button>
+    </div>
+  </div>
+
+  <!-- End screen -->
+  <div id="screen-victory" class="screen">
+    <div class="victory-crowd" id="victory-crowd"></div>
+    <div class="victory-text">
+      <h1>You win — you did it!</h1>
+      <p class="crowd-line">10,000 people celebrate you and sing <em>We Are the Champions</em>.</p>
+      <p class="lyric" id="lyric-line"></p>
+    </div>
+  </div>
+
+  <!-- Gun gauntlet: after hell hacker, before final thanks -->
+  <div id="screen-impossible" class="screen game-screen">
+    <div class="game-header compact">
+      <span class="level-tag">Final gauntlet</span>
+      <h2>Twenty Guns</h2>
+      <p class="hell-sub">Ring of turrets · predictive shots · ricochets · Survive the timer to reach the win screen</p>
+    </div>
+    <canvas id="canvas-impossible" width="800" height="560"></canvas>
+    <p class="controls-hint">Arrow keys — survive <strong>14 seconds</strong></p>
+  </div>
+
+  <!-- Hell mode: hacked takeover (after lyrics) -->
+  <div id="screen-hacked" class="screen hell-screen">
+    <div class="hacked-box">
+      <p class="hacked-title">■■ HACKED ■■</p>
+      <p class="hacked-msg">Alvin Chan — you defeated the first part of the game.</p>
+      <p class="hell-mode-line">NOW: <span>HELL MODE</span></p>
+      <p id="hell-checkpoint-line" class="hell-checkpoint-hint"></p>
+      <p class="hint dim">Press <kbd>Enter</kbd> to continue from your checkpoint</p>
+      <button type="button" id="btn-hell-reset" class="hell-reset-btn">Reset checkpoint — start from Hell 1</button>
+    </div>
+  </div>
+
+  <div id="screen-hell1" class="screen game-screen hell-screen">
+    <div class="game-header compact">
+      <span class="level-tag">Hell 1 / 4 — Troll Obby</span>
+    </div>
+    <div id="hell1-wrap" class="hell-wrap"></div>
+  </div>
+
+  <div id="screen-hell2" class="screen game-screen hell-screen">
+    <div class="game-header compact">
+      <span class="level-tag">Hell 2 / 4 — Football</span>
+      <p class="hell-sub">Score <strong>20–0</strong> in <strong>5 minutes</strong> · Arrows move · Hold <kbd>Space</kbd> to charge · <strong>Aimbot</strong> aims shots at the goal + helps you chase the ball</p>
+    </div>
+    <canvas id="canvas-hell-football" width="720" height="480"></canvas>
+  </div>
+
+  <div id="screen-hell3" class="screen game-screen hell-screen">
+    <div class="game-header compact">
+      <span class="level-tag">Hell 3 / 4 — Five Guns</span>
+      <p class="hell-sub">Fixed-direction turrets — bullets <strong>bounce</strong> off walls &amp; edges · Survive <strong>40s</strong></p>
+    </div>
+    <canvas id="canvas-hell-guns" width="640" height="520"></canvas>
+  </div>
+
+  <div id="screen-hell4" class="screen game-screen hell-screen">
+    <div class="game-header compact">
+      <span class="level-tag">Hell 4 / 4 — The Hacker</span>
+    </div>
+    <div id="hell4-root" class="hell4-root"></div>
+  </div>
+
+  <div id="screen-thanks" class="screen hell-screen">
+    <div class="thanks-box">
+      <h1>Thank you</h1>
+      <p class="thanks-main">Thank you for completing the <strong>alvin chan expirenement</strong>. Thank you.</p>
+      <button type="button" id="btn-play-again">Play again</button>
+    </div>
+  </div>
+
+  <script src="js/blackjack.js"></script>
+  <script src="js/spaceinvaders.js"></script>
+  <script src="js/streetfighter.js"></script>
+  <script src="js/pong.js"></script>
+  <script src="js/fifthgrader.js"></script>
+  <script src="js/sans.js"></script>
+  <script src="js/hellmode.js"></script>
+  <script src="js/impossible.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

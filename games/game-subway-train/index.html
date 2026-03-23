@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lane Chase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game" width="800" height="600" aria-label="Game view"></canvas>
+      <div id="hud">
+        <div id="score-panel" class="panel">
+          <span class="label">Score</span>
+          <span id="score-value">0</span>
+        </div>
+        <div id="overlay" class="overlay hidden">
+          <div class="overlay-card panel">
+            <canvas
+              id="kid-portrait"
+              width="160"
+              height="200"
+              class="kid-portrait hidden"
+              aria-hidden="true"
+            ></canvas>
+            <h1 id="overlay-title">Lane Chase</h1>
+            <p id="overlay-msg" class="overlay-msg">Press Space to start</p>
+            <p class="hint">Arrow Left / Right — switch tracks</p>
+            <p class="hint goal" id="goal-hint"></p>
+            <button type="button" id="btn-start" class="btn">Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>

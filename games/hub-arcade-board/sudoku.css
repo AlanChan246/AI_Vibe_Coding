@@ -1,0 +1,176 @@
+.sudoku-app .subtitle {
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sudoku-controls {
+  margin-bottom: 1rem;
+}
+
+.sudoku-control-row {
+  align-items: flex-start;
+}
+
+.sudoku-diff .difficulty-legend {
+  margin-bottom: 0.35rem;
+}
+
+.sudoku-status {
+  margin: 0.65rem 0 0;
+  min-height: 1.35rem;
+}
+
+.sudoku-main {
+  justify-content: center;
+}
+
+.sudoku-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+.sudoku-grid {
+  --s-cell: min(10vmin, 44px);
+  display: grid;
+  grid-template-columns: repeat(9, var(--s-cell));
+  grid-template-rows: repeat(9, var(--s-cell));
+  width: calc(9 * var(--s-cell));
+  gap: 0;
+  padding: 3px;
+  border-radius: calc(var(--radius) + 2px);
+  background: linear-gradient(145deg, #1e3a5f 0%, #0f172a 50%, #172554 100%);
+  box-shadow:
+    0 0 0 2px rgba(56, 189, 248, 0.25),
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.sudoku-cell {
+  margin: 0;
+  padding: 0;
+  width: var(--s-cell);
+  height: var(--s-cell);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.92);
+  color: var(--text);
+  font-size: clamp(0.95rem, 3.5vmin, 1.2rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+}
+
+.sudoku-cell:nth-child(9n + 3),
+.sudoku-cell:nth-child(9n + 6) {
+  border-right: 2px solid rgba(56, 189, 248, 0.55);
+}
+
+.sudoku-cell:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-cell:nth-child(n + 46):nth-child(-n + 54) {
+  border-bottom: 2px solid rgba(56, 189, 248, 0.55);
+}
+
+.sudoku-cell.given {
+  color: #e0f2fe;
+  background: rgba(30, 58, 138, 0.55);
+  font-weight: 700;
+  cursor: default;
+}
+
+.sudoku-cell.selected {
+  background: rgba(14, 165, 233, 0.28);
+  box-shadow: inset 0 0 0 2px rgba(56, 189, 248, 0.7);
+  z-index: 1;
+}
+
+.sudoku-cell.conflict {
+  background: rgba(248, 113, 113, 0.22);
+  color: #fecaca;
+}
+
+.sudoku-cell.given.conflict {
+  background: rgba(185, 28, 28, 0.45);
+}
+
+.sudoku-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+.sudoku-cell.win-pulse {
+  animation: sudokuWin 0.6s ease;
+}
+
+@keyframes sudokuWin {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: inset 0 0 12px rgba(52, 211, 153, 0.5);
+  }
+}
+
+.sudoku-pad {
+  width: 100%;
+  max-width: calc(9 * var(--s-cell, 44px) + 6px);
+}
+
+.sudoku-pad-row {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.pad-btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.4rem 0;
+  border-radius: 6px;
+  border: 1px solid rgba(100, 140, 200, 0.35);
+  background: rgba(30, 41, 59, 0.9);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.pad-btn:hover {
+  background: rgba(51, 65, 85, 0.95);
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.pad-btn:active {
+  transform: scale(0.97);
+}
+
+.pad-erase {
+  width: 100%;
+}
+
+.sudoku-won .sudoku-cell {
+  cursor: default;
+}
+
+@media (max-width: 480px) {
+  .sudoku-grid {
+    --s-cell: min(9.2vmin, 38px);
+  }
+
+  .sudoku-pad-row {
+    gap: 0.2rem;
+  }
+
+  .pad-btn {
+    font-size: 0.85rem;
+    padding: 0.35rem 0;
+  }
+}

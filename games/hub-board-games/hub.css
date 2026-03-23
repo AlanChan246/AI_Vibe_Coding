@@ -1,0 +1,229 @@
+/* 遊戲大廳 — 依 styles.css 變數 */
+
+/* 覆寫 .app 的窄版寬度，讓大圖示卡片有足夠空間 */
+.app.hub {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2.5rem;
+}
+
+.hub-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hub-hero h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+}
+
+.hub-lead {
+  margin: 0.65rem auto 0;
+  max-width: 32rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(246, 240, 230, 0.78);
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+/* 五個大圖示：手機兩欄、中螢幕三欄、寬螢幕五欄 */
+.hub-grid--icon-led {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 0.85rem;
+}
+
+@media (min-width: 560px) {
+  .hub-grid--icon-led {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .hub-grid--icon-led {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.15rem;
+  }
+}
+
+.hub-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.35rem 1.35rem 1.25rem;
+  border-radius: var(--radius);
+  background: linear-gradient(155deg, rgba(38, 34, 58, 0.92), rgba(18, 16, 32, 0.96));
+  border: 1px solid rgba(120, 160, 255, 0.18);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  outline: none;
+}
+
+.hub-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(129, 140, 248, 0.45);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(99, 102, 241, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hub-card:focus-visible {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.45),
+    0 14px 40px rgba(0, 0, 0, 0.4);
+}
+
+.hub-card-icon {
+  font-size: 2.25rem;
+  line-height: 1;
+  margin-bottom: 0.65rem;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+}
+
+/* 首頁五格：置中大圖示 */
+.hub-card--icon-led {
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem 1.35rem;
+  min-height: 11.5rem;
+}
+
+.hub-card--icon-led .hub-card-icon {
+  font-size: clamp(3.25rem, 9vw, 4.75rem);
+  margin-bottom: 0.85rem;
+  line-height: 1;
+}
+
+/* ✕○ 為文字符號，略縮以免視覺過大 */
+.hub-card--icon-led .hub-card-icon--text {
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.hub-card--icon-led .hub-card-title {
+  font-size: 1.05rem;
+}
+
+.hub-card--icon-led .hub-card-desc {
+  margin: 0.35rem 0 0.85rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: rgba(246, 240, 230, 0.65);
+}
+
+.hub-card--icon-led .hub-card-cta {
+  margin-top: auto;
+}
+
+.hub-card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--paper);
+  letter-spacing: 0.04em;
+}
+
+.hub-card-desc {
+  margin: 0.45rem 0 1rem;
+  flex: 1;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(246, 240, 230, 0.72);
+}
+
+.hub-card-cta {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #a5b4fc;
+  letter-spacing: 0.02em;
+}
+
+.hub-card:hover .hub-card-cta {
+  color: #c4d4ff;
+}
+
+.hub-card--ludo {
+  --hub-accent: #f472b6;
+}
+
+.hub-card--ludo:hover {
+  border-color: rgba(244, 114, 182, 0.4);
+}
+
+.hub-card--ludo .hub-card-cta {
+  color: #f9a8d4;
+}
+
+.hub-card--gomoku {
+  --hub-accent: #fcd34d;
+}
+
+.hub-card--gomoku:hover {
+  border-color: rgba(252, 211, 77, 0.35);
+}
+
+.hub-card--gomoku .hub-card-cta {
+  color: #fde68a;
+}
+
+.hub-card--ttt {
+  --hub-accent: #34d399;
+}
+
+.hub-card--ttt:hover {
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.hub-card--ttt .hub-card-cta {
+  color: #6ee7b7;
+}
+
+.hub-card--portfolio {
+  --hub-accent: #818cf8;
+}
+
+.hub-card--portfolio:hover {
+  border-color: rgba(129, 140, 248, 0.45);
+}
+
+.hub-card--portfolio .hub-card-cta {
+  color: #a5b4fc;
+}
+
+.hub-card--contact {
+  --hub-accent: #fbbf24;
+}
+
+.hub-card--contact:hover {
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+.hub-card--contact .hub-card-cta {
+  color: #fcd34d;
+}
+
+.hub-footer {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(246, 240, 230, 0.45);
+}

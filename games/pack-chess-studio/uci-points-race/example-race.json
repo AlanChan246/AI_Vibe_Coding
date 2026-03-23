@@ -1,0 +1,19 @@
+{
+  "sprints": [
+    {
+      "order": [["Anna", "Beth"], ["Chris"], ["Dana"]]
+    },
+    {
+      "order": [["Chris"], ["Anna"], ["Beth"], ["Dana"]]
+    },
+    {
+      "order": [["Dana"], ["Anna"], ["Beth"], ["Chris"]]
+    }
+  ],
+  "lap_gains": {
+    "Anna": 1
+  },
+  "lap_losses": {
+    "Dana": 1
+  }
+}

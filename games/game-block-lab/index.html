@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Block Lab // Build &amp; Create</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="viewport" aria-label="3D build world"></div>
+      <div id="crosshair" aria-hidden="true"></div>
+      <div id="npc-hint" class="npc-hint" hidden>
+        <kbd>R</kbd> · <span id="npc-hint-action">Talk to</span>
+        <strong id="npc-hint-name"></strong>
+      </div>
+      <div id="eat-hint" class="eat-hint" hidden>
+        <kbd>G</kbd> Eat nearby food (Juice · Pizza · Salad)
+      </div>
+
+      <div id="hud-top" class="hud-panel">
+        <div class="logo">
+          <span class="logo__icon">▣</span>
+          <div>
+            <strong>Block Lab</strong>
+            <span class="logo__tag">build · stack · invent</span>
+          </div>
+        </div>
+        <div class="hud-top__mid">
+          <span class="simoleons" id="sim-money" title="Household funds">§ 20,000</span>
+          <span class="sim-time" id="sim-time" title="Neighborhood time">8:00 AM</span>
+          <button type="button" class="btn btn--catalog" id="btn-catalog" title="Open buy catalog (B)">
+            CATALOG
+          </button>
+          <button type="button" class="btn btn--mode" id="btn-mode" title="Switch Live / Build (Tab)">
+            LIVE MODE
+          </button>
+        </div>
+        <button type="button" class="btn btn--small" id="btn-fullscreen" title="Fullscreen">
+          FULLSCREEN
+        </button>
+      </div>
+
+      <div id="hud-left" class="hud-panel hud-panel--stack">
+        <p class="hud-title">Controls</p>
+        <ul class="hud-list">
+          <li><kbd>Click</kbd> canvas — look around</li>
+          <li><kbd>W A S D</kbd> — move</li>
+          <li><kbd>Space</kbd> — jump</li>
+          <li><kbd>Left click</kbd> — break block</li>
+          <li><kbd>Right click</kbd> — place block</li>
+          <li><kbd>Ctrl</kbd>+<kbd>click</kbd> — place (trackpad / no RMB)</li>
+          <li><kbd>E</kbd> or <kbd>F</kbd> — place at crosshair</li>
+          <li><kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd> — pick material</li>
+          <li><kbd>-</kbd> <kbd>=</kbd> — more slots</li>
+          <li><kbd>[</kbd> <kbd>]</kbd> <kbd>`</kbd> — food items</li>
+          <li><kbd>G</kbd> — eat when standing by food blocks</li>
+          <li><kbd>Tab</kbd> — Live ↔ Build (needs pause in Build)</li>
+          <li><kbd>B</kbd> — catalog (mouse unlocks for panels)</li>
+          <li><kbd>R</kbd> — chat with nearby NPC (face them)</li>
+          <li><kbd>Esc</kbd> — release mouse</li>
+        </ul>
+      </div>
+
+      <div id="sim-dock" class="hud-panel sim-dock">
+        <div class="sim-dock__tabs" role="tablist">
+          <button type="button" class="sim-tab is-active" data-sim-tab="needs" role="tab">Needs</button>
+          <button type="button" class="sim-tab" data-sim-tab="buy" role="tab">Buy</button>
+          <button type="button" class="sim-tab" data-sim-tab="friends" role="tab">Friends</button>
+          <button type="button" class="sim-tab" data-sim-tab="career" role="tab">Career</button>
+        </div>
+        <div class="sim-dock__body">
+          <div id="tab-needs" class="sim-tab-panel is-active" data-panel="needs" role="tabpanel">
+            <p class="sim-dock__mood" id="sim-mood">Feeling fine</p>
+            <div class="need" data-need="bladder">
+              <span class="need__label">Bladder</span>
+              <div class="need__bar"><div class="need__fill" style="width: 85%"></div></div>
+            </div>
+            <div class="need" data-need="hunger">
+              <span class="need__label">Hunger</span>
+              <div class="need__bar"><div class="need__fill" style="width: 85%"></div></div>
+            </div>
+            <div class="need" data-need="energy">
+              <span class="need__label">Energy</span>
+              <div class="need__bar"><div class="need__fill" style="width: 85%"></div></div>
+            </div>
+            <div class="need" data-need="fun">
+              <span class="need__label">Fun</span>
+              <div class="need__bar"><div class="need__fill" style="width: 85%"></div></div>
+            </div>
+            <div class="need" data-need="social">
+              <span class="need__label">Social</span>
+              <div class="need__bar"><div class="need__fill" style="width: 85%"></div></div>
+            </div>
+            <div class="need" data-need="hygiene">
+              <span class="need__label">Hygiene</span>
+              <div class="need__bar"><div class="need__fill" style="width: 85%"></div></div>
+            </div>
+            <p class="sim-dock__hint">
+              Furniture refills needs nearby. Food blocks (Buy → Food) boost Hunger faster; press
+              <kbd>G</kbd> next to them for a big bite.
+            </p>
+          </div>
+          <div id="tab-buy" class="sim-tab-panel sim-tab-panel--buy" data-panel="buy" role="tabpanel" hidden>
+            <p class="sim-dock__section-title">Categories</p>
+            <div id="buy-categories" class="buy-categories"></div>
+            <p class="sim-dock__section-title">Objects</p>
+            <div id="buy-grid" class="buy-grid"></div>
+          </div>
+          <div id="tab-friends" class="sim-tab-panel" data-panel="friends" role="tabpanel" hidden>
+            <p class="sim-dock__section-title">Household &amp; neighbors</p>
+            <div id="friends-list" class="friends-list"></div>
+            <div class="friends-actions">
+              <label class="friends-actions__label" for="friend-pick">Hang out with</label>
+              <select id="friend-pick" class="friends-select"></select>
+              <button type="button" class="btn btn--action" id="btn-hangout">Hang out</button>
+              <p class="sim-dock__hint">Face the NPC, press <kbd>R</kbd>. Full chat costs Energy; when Energy is under 10 you still get a short chat.</p>
+            </div>
+          </div>
+          <div id="tab-career" class="sim-tab-panel" data-panel="career" role="tabpanel" hidden>
+            <p class="sim-dock__section-title">Job</p>
+            <select id="career-pick" class="friends-select friends-select--wide"></select>
+            <div id="career-summary" class="career-summary"></div>
+            <button type="button" class="btn btn--action" id="btn-shift">Work a shift</button>
+            <p id="shift-status" class="sim-dock__hint"></p>
+            <p class="sim-dock__hint">Hourly pay ticks in Live mode. Shifts pay a bonus and grant XP.</p>
+          </div>
+        </div>
+        <div class="sim-dock__foot">
+          <button type="button" class="btn btn--resume" id="btn-resume-3d">Resume 3D view</button>
+        </div>
+      </div>
+
+      <div id="hud-bottom" class="hud-panel">
+        <span class="slot-label">Material</span>
+        <div id="block-bar" class="block-bar"></div>
+      </div>
+
+      <div id="splash" class="splash">
+        <div class="splash__card">
+          <h1 class="splash__title">Block Lab</h1>
+          <p class="splash__text">
+            Build voxel rooms, then play a light life-sim layer: household funds, a day clock,
+            six needs meters, and furniture blocks that refill them when you stand nearby. Press
+            Tab for Live/Build, B for the buy catalog, Friends and Career on the right dock.
+          </p>
+          <button type="button" class="btn btn--go" id="btn-play">
+            Click to play
+          </button>
+          <p class="splash__hint">
+            Uses mouse look · works best with a mouse. After play, if the view does not turn with the mouse,
+            click once on the 3D view; opening the site over <code>http://localhost</code> avoids some browser
+            limits.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="game.js"></script>
+  </body>
+</html>

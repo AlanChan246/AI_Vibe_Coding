@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UCI 計分賽 · 積分計算</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <p class="eyebrow">UCI 場地賽 · § 7 計分賽</p>
+      <h1>計分賽積分計算器</h1>
+      <p class="lede">
+        中途衝刺得分（3.2.118）：<strong>5–3–2–1</strong>；最後一次衝刺<strong>雙倍計分</strong>。
+        超圈<strong>+20</strong> 分，被扣圈<strong>−20</strong> 分。總分相同時依<strong>最後衝刺</strong>名次決定（3.2.119）。
+      </p>
+    </header>
+
+    <div class="toolbar">
+      <button type="button" class="btn primary" id="btn-calc">計算</button>
+      <button type="button" class="btn" id="btn-example">載入範例</button>
+      <button type="button" class="btn" id="btn-export">匯出 JSON</button>
+      <label class="btn file-label">
+        匯入 JSON
+        <input type="file" id="import-file" accept="application/json,.json" hidden />
+      </label>
+    </div>
+
+    <p class="hint" id="message" role="status" aria-live="polite"></p>
+
+    <p class="stt-banner" id="stt-banner" role="note" hidden></p>
+
+    <section class="panel" aria-labelledby="sprints-heading">
+      <h2 id="sprints-heading">衝刺（中途計分點）</h2>
+      <p class="panel-note">
+        每個衝刺：<strong>一行代表一個名次</strong>。同一行內以<strong>逗號、中文逗號或頓號</strong>隔開的名字視為<strong>並列</strong>（得分相同；下一個名次跳過）。
+        清單中<strong>最後一項</strong>為決勝衝刺（分數雙倍）。可使用下方<strong>粵語語音輸入</strong>（香港中文，<code>zh-HK</code>）逐行口述名次。
+      </p>
+      <div id="sprint-list" class="sprint-list"></div>
+      <button type="button" class="btn ghost" id="btn-add-sprint">+ 新增衝刺</button>
+    </section>
+
+    <section class="panel" aria-labelledby="riders-heading">
+      <h2 id="riders-heading">車手與圈數</h2>
+      <p class="panel-note">
+        車手姓名取自上方衝刺內容。請設定超圈／被扣圈次數，以及選填的<strong>起始分數</strong>（例如全能賽帶入分）。
+      </p>
+      <div id="rider-grid" class="rider-grid empty">
+        <p class="empty-riders">請先在上方輸入至少一個衝刺，再按「<strong>計算</strong>」列出車手。</p>
+      </div>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="results-heading" hidden id="results-section">
+      <h2 id="results-heading">名次與積分</h2>
+      <div class="table-wrap">
+        <table class="standings" id="results-table">
+          <thead>
+            <tr>
+              <th scope="col">名次</th>
+              <th scope="col">車手</th>
+              <th scope="col">總分</th>
+              <th scope="col">衝刺</th>
+              <th scope="col">超圈+</th>
+              <th scope="col">扣圈</th>
+              <th scope="col" title="決勝衝刺名次，用於總分相同時排序（數字愈小愈佳）">決勝序</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+      <details class="breakdown-details">
+        <summary>各車手明細</summary>
+        <pre id="breakdown-pre" class="breakdown-pre"></pre>
+      </details>
+    </section>
+
+    <footer class="footer">
+      <p>
+        依據 UCI《單車競賽規則》第三部 E 輯（場地賽），例如
+        <a href="https://assets.ctfassets.net/761l7gh5x5an/7IE4WjTvQLqeRF5aniDP34/ffccabbbc5b69d25994a5f656ecb2225/PART_3_E_-_As_of_01.01.2026.pdf" target="_blank" rel="noopener">2026 年 1 月 1 日起適用之 E 輯文本</a>。
+        正式競賽與仲裁請一律以官方最新公布規則為準。
+      </p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>五子棋 15×15</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <div class="app">
+    <nav class="game-nav game-nav--split">
+      <a href="index.html" class="nav-back">← 返回主頁</a>
+      <div id="user-bar" class="user-bar"></div>
+    </nav>
+    <header class="header">
+      <h1>五子棋</h1>
+      <p class="subtitle">你執黑子先手，對戰電腦白子</p>
+    </header>
+
+    <section class="controls" aria-label="遊戲控制">
+      <div class="control-row control-row--diff">
+        <fieldset class="difficulty-field">
+          <legend class="difficulty-legend">難度（對戰電腦）</legend>
+          <div class="diff-buttons" role="presentation">
+            <label class="diff-option">
+              <input type="radio" name="difficulty" value="easy" />
+              <span class="diff-option-label">簡單</span>
+            </label>
+            <label class="diff-option">
+              <input type="radio" name="difficulty" value="medium" checked />
+              <span class="diff-option-label">普通</span>
+            </label>
+            <label class="diff-option">
+              <input type="radio" name="difficulty" value="hard" />
+              <span class="diff-option-label">困難</span>
+            </label>
+          </div>
+        </fieldset>
+        <button type="button" id="btn-new" class="btn primary">新局</button>
+        <button type="button" id="btn-undo" class="btn secondary" disabled>悔棋</button>
+      </div>
+      <div class="status-row">
+        <p id="status" class="status" role="status">輪到你（黑）落子</p>
+        <p id="thinking" class="thinking hidden" aria-live="polite">電腦思考中…</p>
+      </div>
+    </section>
+
+    <main class="main">
+      <div
+        id="board"
+        class="board"
+        role="grid"
+        aria-label="15 乘 15 棋盤"
+      ></div>
+
+      <aside class="stats-panel" aria-label="戰績">
+        <h2>戰績</h2>
+        <dl class="stats-total">
+          <dt>勝</dt><dd id="stat-wins">0</dd>
+          <dt>負</dt><dd id="stat-losses">0</dd>
+          <dt>和</dt><dd id="stat-draws">0</dd>
+          <dt>總局</dt><dd id="stat-games">0</dd>
+        </dl>
+        <h3 class="stats-by-diff">本難度</h3>
+        <dl class="stats-current">
+          <dt>勝</dt><dd id="stat-cur-wins">0</dd>
+          <dt>負</dt><dd id="stat-cur-losses">0</dd>
+          <dt>和</dt><dd id="stat-cur-draws">0</dd>
+        </dl>
+        <button type="button" id="btn-reset-stats" class="btn ghost">重置戰績</button>
+      </aside>
+    </main>
+  </div>
+  <script src="auth.js"></script>
+  <script src="user-bar.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

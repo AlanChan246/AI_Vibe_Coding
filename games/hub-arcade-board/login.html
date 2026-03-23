@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登入 · 遊戲大廳</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <nav class="auth-nav">
+      <a href="index.html" class="nav-back">← 返回大廳</a>
+    </nav>
+
+    <main class="auth-card" aria-labelledby="auth-title">
+      <h1 id="auth-title" class="auth-title">玩家帳號</h1>
+      <p class="auth-lead">
+        資料僅存在本機瀏覽器。登入後五子棋戰績會與帳號綁定；也可使用訪客模式。
+      </p>
+
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab is-active" role="tab" aria-selected="true" data-tab="login">
+          登入
+        </button>
+        <button type="button" class="auth-tab" role="tab" aria-selected="false" data-tab="register">
+          註冊
+        </button>
+      </div>
+
+      <p id="auth-msg" class="auth-msg" role="status"></p>
+
+      <form id="form-login" class="auth-panel is-active" autocomplete="username">
+        <label class="auth-label" for="login-user">帳號</label>
+        <input id="login-user" class="auth-input" type="text" name="username" required minlength="2" maxlength="20" />
+
+        <label class="auth-label" for="login-pass">密碼</label>
+        <input id="login-pass" class="auth-input" type="password" name="password" required minlength="4" maxlength="128" />
+
+        <button type="submit" class="btn primary auth-submit">登入</button>
+      </form>
+
+      <form id="form-register" class="auth-panel" autocomplete="off">
+        <label class="auth-label" for="reg-user">新帳號</label>
+        <input id="reg-user" class="auth-input" type="text" required minlength="2" maxlength="20" />
+
+        <label class="auth-label" for="reg-pass">密碼（至少 4 字）</label>
+        <input id="reg-pass" class="auth-input" type="password" required minlength="4" maxlength="128" />
+
+        <label class="auth-label" for="reg-pass2">確認密碼</label>
+        <input id="reg-pass2" class="auth-input" type="password" required minlength="4" maxlength="128" />
+
+        <button type="submit" class="btn primary auth-submit">建立帳號並登入</button>
+      </form>
+
+      <div class="auth-divider"><span>或</span></div>
+
+      <button type="button" id="btn-guest" class="btn secondary auth-guest">
+        以訪客身分繼續（不註冊）
+      </button>
+      <p class="auth-hint">訪客與會員的戰績分開計算；清除網站資料會一併刪除帳號與紀錄。</p>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      function safeNext() {
+        var p = new URLSearchParams(location.search);
+        var n = p.get("next");
+        if (n && /^[a-z0-9_.-]+\.html$/i.test(n)) return n;
+        return "index.html";
+      }
+
+      function goNext() {
+        location.href = safeNext();
+      }
+
+      function setMsg(t, isErr) {
+        var el = document.getElementById("auth-msg");
+        el.textContent = t || "";
+        el.classList.toggle("auth-msg--err", !!isErr);
+      }
+
+      document.querySelectorAll(".auth-tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          var name = tab.getAttribute("data-tab");
+          document.querySelectorAll(".auth-tab").forEach(function (x) {
+            x.classList.toggle("is-active", x === tab);
+            x.setAttribute("aria-selected", x === tab ? "true" : "false");
+          });
+          document.querySelectorAll(".auth-panel").forEach(function (p) {
+            p.classList.remove("is-active");
+          });
+          if (name === "login") {
+            document.getElementById("form-login").classList.add("is-active");
+          } else {
+            document.getElementById("form-register").classList.add("is-active");
+          }
+          setMsg("");
+        });
+      });
+
+      document.getElementById("form-login").addEventListener("submit", function (e) {
+        e.preventDefault();
+        setMsg("登入中…");
+        var u = document.getElementById("login-user").value;
+        var pw = document.getElementById("login-pass").value;
+        window.ArcadeAuth.login(u, pw).then(function (r) {
+          if (r.ok) {
+            setMsg("成功！正在跳轉…");
+            goNext();
+          } else {
+            setMsg(r.msg || "登入失敗", true);
+          }
+        });
+      });
+
+      document.getElementById("form-register").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var u = document.getElementById("reg-user").value;
+        var pw = document.getElementById("reg-pass").value;
+        var pw2 = document.getElementById("reg-pass2").value;
+        if (pw !== pw2) {
+          setMsg("兩次密碼不一致", true);
+          return;
+        }
+        setMsg("建立中…");
+        window.ArcadeAuth.register(u, pw).then(function (r) {
+          if (r.ok) {
+            setMsg("註冊成功！正在跳轉…");
+            goNext();
+          } else {
+            setMsg(r.msg || "註冊失敗", true);
+          }
+        });
+      });
+
+      document.getElementById("btn-guest").addEventListener("click", function () {
+        window.ArcadeAuth.enterGuest();
+        goNext();
+      });
+    })();
+  </script>
+</body>
+</html>

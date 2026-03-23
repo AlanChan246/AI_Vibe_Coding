@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>飛行棋 · 網頁版</title>
+  <link rel="stylesheet" href="ludo.css" />
+</head>
+<body>
+  <div class="ludo-app">
+    <header class="ludo-header">
+      <h1>飛行棋</h1>
+      <p class="tagline">
+        四人輪流擲骰、把四架飛機飛進中央終點 ·
+        <a href="index.html">遊戲大廳</a> ·
+        <a href="gomoku.html">五子棋</a> ·
+        <a href="tictactoe.html">井字過三關</a>
+      </p>
+    </header>
+
+    <section class="ludo-toolbar" aria-label="模式與操作">
+      <label>
+        模式
+        <select id="mode-select" aria-label="遊戲模式">
+          <option value="human4">四人同機輪流</option>
+          <option value="ai3" selected>你（紅方）對戰 3 位電腦</option>
+        </select>
+      </label>
+      <button type="button" id="btn-roll" class="btn dice primary" aria-label="擲骰子">
+        擲骰 <span id="dice-face" aria-hidden="true">—</span>
+      </button>
+      <button type="button" id="btn-new" class="btn ghost">新局</button>
+    </section>
+
+    <div class="ludo-main">
+      <div class="ludo-canvas-wrap">
+        <canvas id="ludo-canvas" width="560" height="560" aria-label="飛行棋盤，點選己方飛機移動"></canvas>
+      </div>
+      <aside class="ludo-side">
+        <div id="ludo-status" class="ludo-status" role="status" aria-live="polite"></div>
+        <div id="ludo-log" class="ludo-log" aria-label="紀錄"></div>
+        <div class="ludo-rules">
+          <h3>規則摘要</h3>
+          <p>
+            擲到 <strong>雙數（2、4、6）</strong> 可從停機坪起飛一架；已在路上的飛機可依點數移動。外圈走滿一圈後，可在己方門前轉入彩色跑道進終點。
+            落在非保護格且與敵機重疊時，敵機被打回停機坪。連續三個 6 暫停一輪。先把四架都飛進中心者獲勝。
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="ludo-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+    <div class="overlay-card">
+      <h2 id="overlay-title">勝負已分</h2>
+      <p id="overlay-winner"></p>
+      <button type="button" id="btn-again" class="btn primary">再來一局</button>
+    </div>
+  </div>
+
+  <script src="ludo.js"></script>
+</body>
+</html>

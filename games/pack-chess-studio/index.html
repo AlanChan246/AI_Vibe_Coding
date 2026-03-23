@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D Gomoku — 8³</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>3D Gomoku</h1>
+      <p class="subtitle">8×8×8 cube · Dog vs Cat · five in a row in any direction (including depth)</p>
+    </header>
+
+    <section class="controls" aria-label="Game controls">
+      <fieldset class="mode-fieldset">
+        <legend>Game mode</legend>
+        <div class="mode-options">
+          <label class="mode-label">
+            <input type="radio" name="game-mode" value="human" checked />
+            Two players
+          </label>
+          <label class="mode-label">
+            <input type="radio" name="game-mode" value="cpu" />
+            vs Computer
+          </label>
+        </div>
+        <p class="mode-hint" id="mode-hint">You play Dog; Cat is the computer.</p>
+      </fieldset>
+      <div class="names">
+        <label class="name-field">
+          <span>Dog</span>
+          <input type="text" id="name-black" maxlength="32" placeholder="Dog" autocomplete="nickname" />
+        </label>
+        <label class="name-field">
+          <span>Cat</span>
+          <input type="text" id="name-white" maxlength="32" placeholder="Cat" autocomplete="nickname" />
+        </label>
+      </div>
+      <div class="actions">
+        <button type="button" id="btn-new-game" class="btn primary">New game</button>
+      </div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite">Dog to move.</p>
+
+    <div class="layer-bar" aria-label="Depth layer highlight">
+      <span class="layer-label">Highlight Z</span>
+      <button type="button" id="layer-prev" class="btn layer-btn" aria-label="Previous depth slice highlight">◀</button>
+      <span id="layer-indicator" class="layer-indicator">1 / 8</span>
+      <button type="button" id="layer-next" class="btn layer-btn" aria-label="Next depth slice highlight">▶</button>
+      <span class="view-hint">Drag on the board to rotate the 3D view · click a cell to play</span>
+    </div>
+
+    <div class="board-wrap">
+      <div class="board-frame">
+        <canvas
+          id="board"
+          width="600"
+          height="600"
+          tabindex="0"
+          aria-label="3D Gomoku cube. Drag to rotate. Click the front-most lattice cell to place a piece. Use highlight Z to show a depth slice."
+        ></canvas>
+      </div>
+    </div>
+
+    <section class="stats" aria-labelledby="stats-heading">
+      <h2 id="stats-heading">Statistics</h2>
+      <div id="stats-current" class="stats-current"></div>
+      <h3 class="stats-sub">Leaderboard</h3>
+      <div id="stats-leaderboard" class="stats-leaderboard"></div>
+    </section>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

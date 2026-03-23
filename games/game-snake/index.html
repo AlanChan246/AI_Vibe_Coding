@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>貪食蛇</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1 class="title">貪食蛇</h1>
+    <p class="hud">
+      <span>分數：<strong id="score">0</strong></span>
+      <span class="hint">方向鍵 / WASD · 空白鍵重新開始</span>
+    </p>
+    <div class="canvas-box">
+      <canvas id="game" width="400" height="400" aria-label="貪食蛇遊戲畫布"></canvas>
+      <div id="overlay" class="overlay hidden" role="dialog" aria-labelledby="overlay-title">
+        <p id="overlay-title" class="overlay-title">遊戲結束</p>
+        <p class="overlay-score">最終分數：<strong id="final-score">0</strong></p>
+        <p class="overlay-hint">按空白鍵或點下方按鈕再玩一次</p>
+        <button type="button" id="restart-btn" class="restart-btn">再玩一次</button>
+      </div>
+    </div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

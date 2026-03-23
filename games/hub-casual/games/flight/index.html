@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>飛行棋 — 休閒遊戲館</title>
+  <link rel="stylesheet" href="flight.css" />
+</head>
+<body>
+  <div class="page">
+    <nav class="top-nav">
+      <a href="../../index.html">← 遊戲館首頁</a>
+    </nav>
+    <h1>飛行棋（簡化版）</h1>
+    <p class="lead">
+      四人輪流擲骰；擲出 <strong>5 或 6</strong> 可從停機坪進入航道起點（若起點被己方佔滿則無法出機）。途中踩到對手單機將其送回停機坪。四架皆返航者勝。
+    </p>
+
+    <div class="panel">
+      <button type="button" id="btn-roll" class="btn">擲骰</button>
+      <span class="dice" id="dice" aria-live="polite">—</span>
+      <span class="turn" id="turn-label"></span>
+      <button type="button" id="btn-new" class="btn ghost">新局</button>
+    </div>
+
+    <div class="board-wrap">
+      <div id="board" class="board" aria-label="環形航道"></div>
+    </div>
+
+    <div id="hangars" class="hangar"></div>
+    <p id="status" class="status" role="status"></p>
+
+    <div class="rules">
+      <strong>返航判定</strong>
+      <ul>
+        <li>從己方起點出發後繞行一圈，再次踏上己方起點格時該機判為「返航」（移出棋盤）。</li>
+        <li>須精準踏上起點：若骰子點數超過，則改為「反彈」剩餘步數。</li>
+      </ul>
+    </div>
+  </div>
+  <script src="flight.js"></script>
+</body>
+</html>

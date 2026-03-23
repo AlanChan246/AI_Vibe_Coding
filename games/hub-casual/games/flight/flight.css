@@ -1,0 +1,261 @@
+:root {
+  --ink: #0f172a;
+  --muted: #64748b;
+  --paper: #f8fafc;
+  --border: #cbd5e1;
+  --p0: #dc2626;
+  --p1: #ca8a04;
+  --p2: #2563eb;
+  --p3: #16a34a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, #fef3c7 0%, #e0f2fe 50%, #fce7f3 100%);
+}
+
+.page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+}
+
+.top-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.top-nav a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.top-nav a:hover {
+  background: #fff;
+}
+
+h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.45rem;
+}
+
+.lead {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #0d9488;
+  background: #14b8a6;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(1.05);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.dice {
+  font-size: 1.75rem;
+  font-weight: 800;
+  min-width: 2.5rem;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  background: #fff;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+}
+
+.turn {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.board-wrap {
+  overflow: auto;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: #fff;
+  border: 2px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  font-size: 0.62rem;
+  position: relative;
+}
+
+.cell.entry-0 {
+  border-color: var(--p0);
+  background: rgba(220, 38, 38, 0.08);
+}
+.cell.entry-1 {
+  border-color: var(--p1);
+  background: rgba(202, 138, 4, 0.1);
+}
+.cell.entry-2 {
+  border-color: var(--p2);
+  background: rgba(37, 99, 235, 0.08);
+}
+.cell.entry-3 {
+  border-color: var(--p3);
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.cell.selectable {
+  outline: 3px solid #14b8a6;
+  cursor: pointer;
+}
+
+.token {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.token.p0 {
+  background: var(--p0);
+}
+.token.p1 {
+  background: var(--p1);
+}
+.token.p2 {
+  background: var(--p2);
+}
+.token.p3 {
+  background: var(--p3);
+}
+
+.hangar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hangar-box {
+  border-radius: 10px;
+  padding: 0.5rem;
+  border: 2px dashed var(--border);
+  min-height: 3.5rem;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.hangar-box h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.hangar-box.p0 h3 {
+  color: var(--p0);
+}
+.hangar-box.p1 h3 {
+  color: var(--p1);
+}
+.hangar-box.p2 h3 {
+  color: var(--p2);
+}
+.hangar-box.p3 h3 {
+  color: var(--p3);
+}
+
+.hangar-box .tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.hangar-box .token {
+  width: 0.85rem;
+  height: 0.85rem;
+  cursor: pointer;
+}
+
+.hangar-box .token.selectable {
+  box-shadow: 0 0 0 3px #14b8a6;
+}
+
+.status {
+  margin-top: 1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+}
+
+.rules {
+  margin-top: 1.5rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.rules ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+}

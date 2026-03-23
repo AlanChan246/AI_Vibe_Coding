@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Balloon Zoo — Twist &amp; Shape</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Balloon Zoo</h1>
+      <p class="tagline">Inflate, twist, and sculpt a cartoon balloon animal!</p>
+    </header>
+
+    <div class="toolbar">
+      <label class="sound-toggle">
+        <input type="checkbox" id="sound-on" checked />
+        <span>Happy sounds</span>
+      </label>
+      <button type="button" class="btn ghost" id="btn-how" aria-expanded="false">How to play</button>
+    </div>
+
+    <div class="how-panel hidden" id="how-panel" role="region" aria-label="How to play">
+      <ol>
+        <li>Pick which balloon animal you want to sculpt.</li>
+        <li>Hold <strong>Inflate</strong> until the meter is in the <span class="green">green zone</span>, then release. Too little or too much pops the balloon!</li>
+        <li>Click each <strong>pulsing twist</strong> in order — the balloon <strong>folds into your animal</strong> as you go.</li>
+        <li>Finish all twists to reveal your animal. Play again to try another shape.</li>
+      </ol>
+    </div>
+
+    <main class="stage-wrap">
+      <canvas id="game" width="880" height="520" aria-label="Balloon game canvas"></canvas>
+
+      <div class="hud">
+        <p class="hud-title" id="phase-label">Menu</p>
+        <p class="hud-msg" id="phase-msg">Press Play to start.</p>
+        <div class="meter-wrap hidden" id="meter-wrap" aria-hidden="true">
+          <div class="meter">
+            <div class="meter-zone"></div>
+            <div class="meter-fill" id="meter-fill"></div>
+          </div>
+          <p class="meter-hint">Release in the green sweet spot!</p>
+        </div>
+      </div>
+
+      <div class="overlay" id="overlay-menu">
+        <div class="card panel">
+          <h2>Ready?</h2>
+          <p class="panel-lead">Desktop play · cartoon twists · simple goals</p>
+          <button type="button" class="btn primary" id="btn-play">Play</button>
+        </div>
+      </div>
+
+      <div class="overlay hidden" id="overlay-pick">
+        <div class="card panel wide">
+          <h2>Pick your sculpture</h2>
+          <p class="panel-lead">Each animal needs a different twist pattern.</p>
+          <div class="animal-grid" id="animal-grid"></div>
+        </div>
+      </div>
+
+      <div class="overlay hidden" id="overlay-result">
+        <div class="card panel result-card">
+          <div class="result-emoji" id="result-emoji" aria-hidden="true"></div>
+          <h2 id="result-title">Nice!</h2>
+          <p id="result-desc"></p>
+          <div class="row">
+            <button type="button" class="btn primary" id="btn-again">Play again</button>
+            <button type="button" class="btn ghost" id="btn-menu">Main menu</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="inflate-bar hidden" id="inflate-bar">
+        <button type="button" class="btn inflate" id="btn-inflate">Hold to inflate</button>
+        <span class="key-hint">or hold <kbd>Space</kbd></span>
+      </div>
+      <p class="fineprint">Tip: works great in Chrome or Edge on Windows. Sounds use the browser (online).</p>
+    </footer>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

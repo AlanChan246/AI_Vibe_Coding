@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>釣魚 — 休閒遊戲館</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div
+    id="lobby-overlay"
+    class="lobby-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lobby-title"
+    aria-describedby="lobby-lead"
+  >
+    <div class="lobby-card">
+      <h1 id="lobby-title" class="lobby-title">釣魚遊戲 · 大廳</h1>
+      <p id="lobby-lead" class="lobby-lead">
+        實體比例 <strong>15 cm × 15 cm</strong> 釣魚池｜單人刷高分，或雙人輪流對戰比總分。
+      </p>
+
+      <div class="lobby-picks" role="group" aria-label="開局設定">
+        <label class="field">
+          <span class="field-label">模式</span>
+          <select id="game-mode" aria-label="遊戲模式">
+            <option value="solo" selected>單人</option>
+            <option value="battle">雙人對戰</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field-label">難度</span>
+          <select id="difficulty" aria-label="選擇難度">
+            <option value="easy">簡單</option>
+            <option value="normal" selected>中等</option>
+            <option value="hard">困難</option>
+          </select>
+        </label>
+      </div>
+
+      <button type="button" id="btn-enter-play" class="btn lobby-enter">進入遊戲</button>
+
+      <details class="lobby-overview">
+        <summary>遊戲內容總覽</summary>
+        <div class="overview-scroll" id="overview-root" aria-label="魚種、難度與模式對照表"></div>
+      </details>
+
+      <details class="lobby-rules">
+        <summary>玩法與規則</summary>
+        <ul>
+          <li>移動游標（或手指）控制釣線左右；按住下放釣鉤，放開收回。</li>
+          <li>鉤尖碰到魚身即算釣獲；多種魚類分值不同，越珍貴越高分。</li>
+          <li><strong>難度</strong>影響限時、魚群數量、游速、收放線手感與稀有魚出現率；開局後無法更改，請先在大廳選好。</li>
+          <li><strong>雙人對戰</strong>：兩人各玩一局（同難度、魚群重刷），比總分；第一局結束後換人，再按「下一位」開第二局。釣線顏色標示輪到誰。</li>
+        </ul>
+      </details>
+
+      <p class="lobby-back-site">
+        <a href="../../index.html">← 返回遊戲館首頁</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="page">
+    <header class="intro intro-compact">
+      <h1>釣魚</h1>
+      <p class="meta">遊戲區 <strong>15 cm 見方</strong> · 完整說明請按「釣魚大廳」查看</p>
+    </header>
+
+    <nav class="play-nav" aria-label="場內導覽">
+      <a href="../../index.html" class="btn ghost home-link">遊戲館首頁</a>
+      <button type="button" id="btn-back-lobby" class="btn ghost">釣魚大廳</button>
+      <p class="play-summary" id="play-settings-summary" aria-live="polite"></p>
+    </nav>
+
+    <div class="hud">
+      <p class="battle-bar hidden" id="battle-bar" aria-live="polite">
+        <span class="battle-p">玩家一 <strong id="battle-p1">—</strong></span>
+        <span class="vs">VS</span>
+        <span class="battle-p">玩家二 <strong id="battle-p2">—</strong></span>
+      </p>
+      <span>分數 <strong id="score">0</strong></span>
+      <span>時間 <strong id="time">60</strong> 秒</span>
+      <button type="button" id="btn-start" class="btn">開始</button>
+      <button type="button" id="btn-reset" class="btn ghost">重開</button>
+      <p class="hud-hint" id="difficulty-hint">進行中或對戰未完成時無法變更模式與難度；若要調整請按「重開」或回大廳。</p>
+    </div>
+
+    <div class="stage-outer" aria-label="遊戲畫面 15 公分見方">
+      <div class="stage-ruler" aria-hidden="true">15 cm</div>
+      <div class="stage-wrap">
+        <canvas id="game" width="400" height="400" aria-label="釣魚池"></canvas>
+      </div>
+      <div class="stage-ruler bottom" aria-hidden="true">15 cm</div>
+    </div>
+
+    <p id="status" class="status" role="status">從大廳選好模式與難度後，按「開始」下鉤。</p>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

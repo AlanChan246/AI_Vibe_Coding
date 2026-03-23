@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>五子棋 · 網頁版</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>五子棋</h1>
+      <p class="subtitle">
+        你執星星先手，對戰電腦（月亮）· 十路棋盤 ·
+        <a href="index.html">遊戲大廳</a> ·
+        <a href="ludo.html">飛行棋</a> ·
+        <a href="tictactoe.html">井字過三關</a>
+      </p>
+    </header>
+
+    <section class="toolbar" aria-label="遊戲控制">
+      <label class="field">
+        <span class="field-label">難度</span>
+        <select id="difficulty" aria-describedby="difficulty-hint">
+          <option value="easy">簡單</option>
+          <option value="normal" selected>普通</option>
+          <option value="hard">困難</option>
+        </select>
+      </label>
+      <button type="button" id="btn-new" class="btn primary">新局</button>
+      <button type="button" id="btn-clear-stats" class="btn ghost">清除戰績</button>
+      <span id="difficulty-hint" class="hint">開局前可切換；進行中變更於下局生效</span>
+    </section>
+
+    <section class="status-bar" aria-live="polite">
+      <span id="turn-label" class="turn-label">輪到：星星（你）</span>
+      <span id="think-label" class="think-label hidden" aria-hidden="true">電腦思考中…</span>
+    </section>
+
+    <section class="stats" aria-label="戰績統計">
+      <h2 class="stats-title">戰績</h2>
+      <div class="stats-grid" id="stats-grid"></div>
+    </section>
+
+    <main class="board-wrap">
+      <div
+        id="board"
+        class="board"
+        role="grid"
+        aria-label="十路棋盤，點擊交叉點落子"
+      ></div>
+    </main>
+  </div>
+
+  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+    <div class="modal">
+      <h2 id="overlay-title" class="modal-title">遊戲結束</h2>
+      <div id="overlay-cry" class="modal-cry hidden" aria-hidden="true" role="img" aria-label="哭泣表情">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="88" height="88" focusable="false">
+          <circle cx="50" cy="52" r="42" fill="#ffd966" stroke="#d4a012" stroke-width="2" />
+          <path d="M28 38q7-6 14 0" stroke="#6b4e16" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <path d="M58 38q7-6 14 0" stroke="#6b4e16" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <ellipse cx="36" cy="48" rx="5" ry="7" fill="#2d2a26" />
+          <ellipse cx="64" cy="48" rx="5" ry="7" fill="#2d2a26" />
+          <path d="M32 58q-4 14-2 24" stroke="#4a9eff" stroke-width="3" fill="none" stroke-linecap="round" />
+          <ellipse cx="30" cy="85" rx="4.5" ry="5.5" fill="#7ec8ff" />
+          <path d="M68 58q4 14 2 24" stroke="#4a9eff" stroke-width="3" fill="none" stroke-linecap="round" />
+          <ellipse cx="70" cy="85" rx="4.5" ry="5.5" fill="#7ec8ff" />
+          <path d="M38 72q12-8 24 0" stroke="#6b4e16" stroke-width="2.5" fill="none" stroke-linecap="round" />
+        </svg>
+      </div>
+      <p id="overlay-msg" class="modal-msg"></p>
+      <div class="modal-actions">
+        <button type="button" id="btn-again" class="btn primary">再來一局</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

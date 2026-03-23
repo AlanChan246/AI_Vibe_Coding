@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Street Brawl — Canvas Fighter</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Street Brawl</h1>
+      <p class="tagline">Local 1v1 · optional CPU · canvas fighter</p>
+    </header>
+
+    <div class="toolbar">
+      <label class="toggle">
+        <input type="checkbox" id="vs-cpu" />
+        <span>vs CPU</span>
+      </label>
+      <button type="button" id="btn-rematch" class="btn">Rematch</button>
+    </div>
+
+    <div class="hud" aria-hidden="true">
+      <div class="bar-wrap p1">
+        <span class="name" id="label-p1">Fighter A</span>
+        <div class="bar-outer"><div class="bar-inner" id="hp-p1"></div></div>
+      </div>
+      <div class="timer" id="timer">99</div>
+      <div class="bar-wrap p2">
+        <span class="name" id="label-p2">Fighter B</span>
+        <div class="bar-outer"><div class="bar-inner" id="hp-p2"></div></div>
+      </div>
+    </div>
+
+    <p id="status" class="status" role="status" aria-live="polite">Fight!</p>
+
+    <div class="canvas-wrap">
+      <canvas id="game" width="960" height="540" tabindex="0" aria-label="Fighting game arena"></canvas>
+    </div>
+
+    <section class="help" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">Controls</h2>
+      <div class="help-grid">
+        <div>
+          <h3>Player 1</h3>
+          <ul>
+            <li><kbd>A</kbd> <kbd>D</kbd> move</li>
+            <li><kbd>W</kbd> jump · <kbd>S</kbd> crouch</li>
+            <li><kbd>J</kbd> punch · <kbd>K</kbd> kick</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Player 2</h3>
+          <ul>
+            <li><kbd>←</kbd> <kbd>→</kbd> move</li>
+            <li><kbd>↑</kbd> jump · <kbd>↓</kbd> crouch</li>
+            <li><kbd>1</kbd> punch · <kbd>2</kbd> kick</li>
+          </ul>
+        </div>
+      </div>
+      <p class="hint">First to drain the other’s health wins. Timer counts down — if time runs out, whoever has more health wins.</p>
+    </section>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

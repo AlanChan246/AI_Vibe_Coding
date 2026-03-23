@@ -1,0 +1,759 @@
+:root {
+  --bg-deep: #030510;
+  --neon-cyan: #00f0ff;
+  --neon-magenta: #ff00aa;
+  --neon-amber: #ffaa00;
+  --text-dim: #6a7a8a;
+  --panel: rgba(8, 20, 40, 0.92);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg-deep);
+  color: #e8f0ff;
+  font-family: "Share Tech Mono", monospace;
+  overflow-x: hidden;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* —— Star Wars crawl —— */
+#screen-crawl {
+  perspective: 400px;
+  background: radial-gradient(ellipse at center, #1a0a2e 0%, #000 70%);
+}
+
+.crawl-space {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 60vh;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.crawl-content {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 85%;
+  max-width: 720px;
+  transform: translateX(-50%) rotateX(28deg);
+  text-align: justify;
+  animation: crawl 90s linear infinite;
+}
+
+@keyframes crawl {
+  0% { top: 100%; opacity: 1; }
+  95% { top: -200%; opacity: 1; }
+  100% { top: -220%; opacity: 0; }
+}
+
+.crawl-title {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: #ffe81f;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+  margin-bottom: 2rem;
+  line-height: 1.35;
+}
+
+.crawl-body {
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  color: #ffeedd;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
+#screen-crawl .hint {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* —— Terminal briefing —— */
+#screen-briefing {
+  background:
+    linear-gradient(180deg, rgba(0, 240, 255, 0.03) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.02) 2px, rgba(0, 240, 255, 0.02) 4px),
+    var(--bg-deep);
+}
+
+.terminal {
+  max-width: 640px;
+  border: 1px solid var(--neon-cyan);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), inset 0 0 60px rgba(0, 80, 120, 0.15);
+  padding: 2rem;
+  background: var(--panel);
+}
+
+.terminal-header {
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-cyan);
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+}
+
+.terminal-line {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #b8fff8;
+  margin-bottom: 1.25rem;
+}
+
+.glitch {
+  position: relative;
+  animation: glitch-skew 4s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-skew {
+  0%, 90%, 100% { transform: translate(0); }
+  91% { transform: translate(-2px, 1px); }
+  92% { transform: translate(2px, -1px); }
+}
+
+.terminal-sub {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.briefing-cheat {
+  margin-bottom: 1.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.briefing-cheat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.35rem;
+}
+
+.briefing-cheat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.briefing-pass-input {
+  flex: 1;
+  min-width: 140px;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(0, 20, 40, 0.8);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #e8f0ff;
+  border-radius: 4px;
+}
+
+.briefing-unlock-btn {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  padding: 0.45rem 0.85rem;
+  background: transparent;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.briefing-unlock-btn:hover {
+  background: rgba(0, 240, 255, 0.12);
+}
+
+.briefing-skip-row {
+  margin-top: 1rem;
+}
+
+.briefing-skip-row.hidden {
+  display: none;
+}
+
+.briefing-skip-title {
+  font-size: 0.8rem;
+  color: var(--neon-amber);
+  margin: 0 0 0.5rem;
+}
+
+.briefing-skip-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 0.45rem;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.82rem;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  background: rgba(40, 0, 50, 0.5);
+  border: 1px solid var(--neon-magenta);
+  color: #f8c8e8;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.briefing-skip-btn:hover {
+  background: rgba(255, 0, 170, 0.15);
+}
+
+.terminal-sub kbd {
+  color: var(--neon-amber);
+}
+
+.hint {
+  text-align: center;
+  color: var(--neon-cyan);
+  font-size: 1rem;
+}
+
+.hint.dim {
+  color: var(--text-dim);
+  margin-top: 1rem;
+}
+
+kbd {
+  padding: 0.15em 0.45em;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+/* —— Games —— */
+.game-screen {
+  padding-top: 0.5rem;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.game-header h2 {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  color: var(--neon-magenta);
+  margin: 0.25rem 0;
+  text-shadow: 0 0 12px rgba(255, 0, 170, 0.4);
+}
+
+.level-tag {
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  letter-spacing: 0.15em;
+}
+
+.one-life {
+  color: var(--neon-amber);
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0;
+}
+
+.game-panel {
+  width: 100%;
+  max-width: 520px;
+  background: var(--panel);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  padding: 1.25rem;
+  border-radius: 8px;
+}
+
+.game-panel.wide {
+  max-width: 640px;
+}
+
+.controls-hint {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto;
+  border: 2px solid rgba(0, 240, 255, 0.4);
+  border-radius: 6px;
+  background: #050a14;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
+  max-width: 100%;
+  height: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Blackjack UI */
+.bj-table {
+  text-align: center;
+}
+.bj-hands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.bj-hand {
+  min-width: 140px;
+}
+.bj-label {
+  color: var(--neon-cyan);
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+.bj-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+  min-height: 72px;
+}
+.bj-card {
+  width: 44px;
+  height: 62px;
+  background: linear-gradient(145deg, #fff 0%, #e0e0e0 100%);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #111;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.bj-card.red { color: #c00; }
+.bj-card.back {
+  background: linear-gradient(145deg, #1a3a6e, #0d1f40);
+  color: transparent;
+  border: 2px solid var(--neon-cyan);
+}
+.bj-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.bj-actions button, .sf-select button, #btn-retry, #btn-play-again {
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 2px solid var(--neon-magenta);
+  color: var(--neon-magenta);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.bj-actions button:hover, .sf-select button:hover, #btn-retry:hover, #btn-play-again:hover {
+  background: var(--neon-magenta);
+  color: #fff;
+}
+.bj-msg {
+  margin-top: 0.75rem;
+  min-height: 1.5em;
+  color: var(--neon-amber);
+}
+
+/* Street Fighter select */
+.sf-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  max-width: 720px;
+  margin-bottom: 1rem;
+}
+.sf-select button {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+.sf-select button:hover {
+  background: var(--neon-cyan);
+  color: #000;
+}
+
+/* Fifth grader */
+.fg-question {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.fg-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.fg-choices button {
+  text-align: left;
+  padding: 0.65rem 1rem;
+  background: rgba(0, 40, 60, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: #e8f0ff;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.fg-choices button:hover {
+  border-color: var(--neon-magenta);
+  background: rgba(80, 0, 60, 0.4);
+}
+.fg-progress {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+/* Overlays */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.overlay.hidden {
+  display: none;
+}
+.overlay-box {
+  text-align: center;
+  padding: 2.5rem;
+  border: 2px solid var(--neon-cyan);
+  background: var(--panel);
+  max-width: 90%;
+}
+.overlay-box h2 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-cyan);
+  margin-top: 0;
+}
+.overlay-box.lose h2 {
+  color: #ff4466;
+  border-color: #ff4466;
+}
+.overlay-box.lose {
+  border-color: #ff4466;
+}
+
+/* Victory */
+#screen-victory {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #2a1040 0%, #050510 55%, #000 100%);
+}
+
+.victory-crowd {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.victory-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.victory-text h1 {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: #ffe81f;
+  text-shadow: 0 0 30px rgba(255, 200, 50, 0.6);
+  margin-bottom: 1rem;
+}
+
+.crowd-line {
+  font-size: 1.1rem;
+  color: #c8d8f0;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.lyric {
+  font-style: italic;
+  color: var(--neon-cyan);
+  min-height: 1.5em;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.crowd-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  animation: cheer 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes cheer {
+  from { transform: translateY(0); opacity: 0.6; }
+  to { transform: translateY(-6px); opacity: 1; }
+}
+
+/* —— Hell mode —— */
+.hell-screen {
+  background: #000;
+}
+
+.hacked-box {
+  max-width: 640px;
+  border: 2px solid #0f0;
+  padding: 2rem;
+  box-shadow: 0 0 40px rgba(0, 255, 0, 0.25), inset 0 0 60px rgba(0, 80, 0, 0.4);
+  background: #030805;
+  font-family: "Share Tech Mono", monospace;
+}
+
+.hacked-title {
+  color: #0f0;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  animation: hacked-pulse 0.8s step-end infinite;
+  margin-top: 0;
+}
+
+@keyframes hacked-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hacked-msg {
+  color: #8f8;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+}
+
+.hell-checkpoint-hint {
+  color: #af0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(170, 255, 0, 0.35);
+  background: rgba(20, 40, 10, 0.5);
+}
+
+.hell-reset-btn {
+  margin-top: 1rem;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid #666;
+  color: #999;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.hell-reset-btn:hover {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+}
+
+.hell-mode-line {
+  color: #f44;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hell-mode-line span {
+  text-shadow: 0 0 12px #f00;
+}
+
+.game-header.compact {
+  margin-bottom: 0.35rem;
+}
+
+.game-header.compact .hell-sub {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin: 0.25rem 0 0;
+  max-width: 720px;
+  text-align: center;
+  line-height: 1.45;
+}
+
+.hell-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+}
+
+.hell-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  z-index: 5;
+}
+
+.hell-overlay.heaven {
+  background: radial-gradient(ellipse at center, #2a4080 0%, #0a1020 70%);
+}
+
+.hell-overlay.gun-flash {
+  background: #600;
+  animation: gun-flash 0.4s ease-out;
+}
+
+@keyframes gun-flash {
+  from { background: #f00; }
+  to { background: rgba(40, 0, 0, 0.95); }
+}
+
+.hell-movie {
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16/9;
+  background: #111;
+  border: 3px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hell-movie-title {
+  font-family: "Orbitron", sans-serif;
+  color: #c00;
+  font-size: 1.4rem;
+}
+
+.hell-health-outer {
+  width: 85%;
+  height: 22px;
+  border: 2px solid #888;
+  margin-top: 2rem;
+  background: #222;
+}
+
+.hell-health-inner {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #0a0, #8f0);
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+}
+
+.hell4-root {
+  width: 100%;
+  max-width: 640px;
+  min-height: 320px;
+}
+
+.hell4-panel {
+  background: var(--panel);
+  border: 1px solid var(--neon-magenta);
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.hell4-panel h3 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-magenta);
+  margin-top: 0;
+}
+
+.hell-type-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem;
+  background: #0a0a12;
+  border: 1px solid var(--neon-cyan);
+  color: #e8f0ff;
+  margin: 0.75rem 0;
+}
+
+.hacker-fall {
+  width: 120px;
+  height: 160px;
+  margin: 2rem auto;
+  background: linear-gradient(180deg, #2a2a3a, #1a1020);
+  border: 2px solid #f0f;
+  position: relative;
+  animation: hacker-fall 2.2s ease-in forwards;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+}
+
+@keyframes hacker-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(180deg); opacity: 0; }
+}
+
+.thanks-box {
+  text-align: center;
+  max-width: 560px;
+  padding: 2rem;
+}
+
+.thanks-box h1 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--neon-cyan);
+  font-size: 2rem;
+}
+
+.thanks-main {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #c8d8f0;
+  margin-bottom: 2rem;
+}
+
+.hell-spam-area {
+  min-height: 180px;
+  border: 2px dashed var(--neon-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: var(--neon-amber);
+}
+
+.hell-spam-area:active {
+  background: rgba(255, 170, 0, 0.1);
+}

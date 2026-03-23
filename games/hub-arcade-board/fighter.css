@@ -1,0 +1,404 @@
+.fighter-app .subtitle {
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fighter-header {
+  margin-bottom: 0.75rem;
+}
+
+/* —— 場景切換 —— */
+.fighter-scenes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+  max-width: 960px;
+  margin: 0 auto 1rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(
+    145deg,
+    rgba(15, 23, 42, 0.75),
+    rgba(30, 41, 59, 0.55)
+  );
+}
+
+.fighter-scenes__label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.fighter-scenes__opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.scene-chip {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+.scene-chip:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #f1f5f9;
+}
+
+.scene-chip.is-active {
+  border-color: rgba(52, 211, 153, 0.65);
+  background: rgba(6, 78, 59, 0.35);
+  color: #ecfdf5;
+  box-shadow: 0 0 14px rgba(52, 211, 153, 0.15);
+}
+
+.scene-chip:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.8);
+  outline-offset: 2px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* —— 選角 —— */
+.char-select {
+  max-width: 960px;
+  margin: 0 auto 1.25rem;
+  padding: 0 0.75rem;
+}
+
+.char-select__title {
+  margin: 0 0 0.75rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--panel-heading);
+}
+
+.char-select__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .char-select__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.char-select__label {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.char-select__keys {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.char-select__pick {
+  margin: 0.65rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7dd3fc;
+}
+
+.char-select__hint {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.char-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.char-card {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.65);
+  color: #e2e8f0;
+  cursor: pointer;
+  font: inherit;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.char-card:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(30, 41, 59, 0.85);
+}
+
+.char-card.is-highlight {
+  border-color: rgba(56, 189, 248, 0.75);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+}
+
+.char-card.is-locked {
+  opacity: 0.85;
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.25);
+}
+
+.char-card__role {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: rgba(148, 163, 184, 0.9);
+  margin-bottom: 0.15rem;
+}
+
+.char-card strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.char-card__skill {
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+/* —— 技能冷卻條 —— */
+.skill-cd {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.skill-cd--p2 {
+  flex-direction: row-reverse;
+}
+
+.skill-cd__track {
+  flex: 1;
+  max-width: 120px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  overflow: hidden;
+}
+
+.skill-cd--p2 .skill-cd__track {
+  margin-left: auto;
+}
+
+.skill-cd__fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1, #a78bfa);
+  box-shadow: 0 0 8px rgba(129, 140, 248, 0.4);
+}
+
+.skill-cd--p2 .skill-cd__fill {
+  transform-origin: right center;
+}
+
+.fighter-hud {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.75rem 1rem;
+  align-items: end;
+  max-width: 960px;
+  margin: 0 auto 0.65rem;
+  padding: 0 0.5rem;
+}
+
+.fighter-hud__p {
+  min-width: 0;
+}
+
+.fighter-hud__p2 {
+  text-align: right;
+}
+
+.fighter-hud__p2 .fighter-bar {
+  flex-direction: row-reverse;
+}
+
+.fighter-hud__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.fighter-hud__p2 .fighter-hud__label {
+  text-align: right;
+}
+
+.fighter-bar {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  overflow: hidden;
+}
+
+.fighter-bar__fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transition: transform 0.08s linear;
+  border-radius: 999px;
+}
+
+.fighter-bar__fill--p1 {
+  background: linear-gradient(90deg, #0369a1, #38bdf8);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+}
+
+.fighter-bar__fill--p2 {
+  background: linear-gradient(90deg, #be123c, #fb7185);
+  box-shadow: 0 0 12px rgba(251, 113, 133, 0.4);
+  transform-origin: right center;
+}
+
+.fighter-hud__score {
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #f8fafc;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+  padding-bottom: 0.15rem;
+  white-space: nowrap;
+}
+
+.fighter-canvas-wrap {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto 1rem;
+  border-radius: calc(var(--radius) + 6px);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 2px rgba(56, 189, 248, 0.2),
+    0 20px 50px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+
+.fighter-canvas-wrap:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(56, 189, 248, 0.55),
+    0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+#fighter-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+  background: #0b1020;
+}
+
+.fighter-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(3, 7, 18, 0.82);
+  backdrop-filter: blur(6px);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.fighter-overlay.hidden {
+  display: none;
+}
+
+.fighter-overlay .btn.hidden {
+  display: none;
+}
+
+.fighter-overlay__text {
+  margin: 0;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 800;
+  color: #f8fafc;
+  text-shadow: 0 0 24px rgba(56, 189, 248, 0.4);
+}
+
+.fighter-help {
+  display: grid;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 0.5rem 2rem;
+}
+
+@media (min-width: 560px) {
+  .fighter-help {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.fighter-help__col h2 {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--panel-heading);
+  letter-spacing: 0.06em;
+}
+
+.fighter-help__col p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.fighter-help kbd {
+  display: inline-block;
+  padding: 0.12rem 0.4rem;
+  margin: 0 0.05rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 5px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
