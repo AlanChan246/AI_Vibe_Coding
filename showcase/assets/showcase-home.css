@@ -1,0 +1,33 @@
+a.showcase-home-btn {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2147483646;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.95rem;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #0f172a;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 999px;
+  box-shadow: 0 2px 14px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+a.showcase-home-btn:hover {
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.18);
+  transform: translateY(-1px);
+}
+
+a.showcase-home-btn:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
